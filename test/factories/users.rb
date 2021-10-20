@@ -3,7 +3,7 @@ FactoryBot.define do
     first_name
     last_name
     password
-    email
+    email { Faker::Internet::email }
     avatar
     type
 
