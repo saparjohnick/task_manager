@@ -6,4 +6,8 @@ FactoryBot.define do
   sequence :date, aliases: [:expired_at] do |_n|
     DateTime.now
   end
+
+  sequence :email do |_n|
+    Faker::Internet::email
+  end
 end
