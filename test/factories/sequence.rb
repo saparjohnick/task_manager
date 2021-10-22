@@ -3,10 +3,6 @@ FactoryBot.define do
     "string #{n}"
   end
 
-  sequence :int, aliases: [:author_id, :assignee_id] do |_n|
-    123
-  end
-
   sequence :date, aliases: [:expired_at] do |_n|
     DateTime.now
   end
