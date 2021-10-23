@@ -39,6 +39,7 @@ class TaskTest < ActiveSupport::TestCase
     @task.in_development
     @task.ready_for_review
     @task.in_development
+    assert_equal 'in_development', @task.state
   end
 
   test ':in_code_review task can be moved to :ready_for_release' do
@@ -54,6 +55,7 @@ class TaskTest < ActiveSupport::TestCase
     @task.ready_for_review
     @task.ready_for_code_review
     @task.in_development
+    assert_equal 'in_development', @task.state
   end
 
   test ':ready_for_release task can be moved to :released' do
@@ -74,11 +76,4 @@ class TaskTest < ActiveSupport::TestCase
     @task.archived
     assert_equal 'archived', @task.state
   end
-  # test ':in_development task can be moved to :archived' do
-  #   @task.start_progress
-  #   @task.archived
-  #   assert_equal 'archived', @task.state
-  # end
-
-
 end
