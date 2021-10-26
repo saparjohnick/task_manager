@@ -4,7 +4,6 @@ FactoryBot.define do
     description
     association :author, factory: :manager
     association :assignee, factory: :manager
-    state
     expired_at
   end
 end
