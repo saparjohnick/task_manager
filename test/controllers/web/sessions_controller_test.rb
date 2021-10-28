@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class Web::SessionsControllerTest < ActionDispatch::IntegrationTest
+class Web::SessionsControllerTest < ActionController::TestCase
   test 'should get new' do
-    get new_session_path
+    get :new
     assert_response :success
   end
 
@@ -13,12 +13,12 @@ class Web::SessionsControllerTest < ActionDispatch::IntegrationTest
       email: user.email,
       password: password,
     }
-    post session_path, params: { session_form: attrs }
+    post :create, params: { session_form: attrs }
     assert_response :redirect
   end
 
   test 'should define destroy' do
-    delete session_path
+    delete :destroy
     assert_response :redirect
   end
 end
