@@ -1,4 +1,4 @@
-class V1::Api::ApplicationController < Api::ApplicationController
+class Api::V1::ApplicationController < Api::ApplicationController
   def self.responder
     JsonResponder
   end

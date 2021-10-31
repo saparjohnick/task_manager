@@ -1,4 +1,6 @@
-class API::ApplicationController < ApplicationController
+class Api::ApplicationController < ApplicationController
+  include AuthHelper
+
   RANSACK_DEFAULT_SORT = 'id ASC'
 
   def build_meta(collection)
