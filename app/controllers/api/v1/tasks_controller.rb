@@ -1,2 +1,2 @@
-class TasksController < V1::API::ApplicationController
+class TasksController < Api::V1::ApplicationController
 end
