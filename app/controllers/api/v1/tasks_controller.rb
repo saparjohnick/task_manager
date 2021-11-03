@@ -1,6 +1,4 @@
 class Api::V1::TasksController < Api::V1::ApplicationController
-  respond_to :json
-
   def index
     tasks = Task.all.
       ransack(ransack_params).
@@ -40,6 +38,6 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :assignee_id, :author_id, :state_event)
+    params.require(:task).permit(:name, :description, :assignee_id, :author_id, :state_event, :expired_at)
   end
 end

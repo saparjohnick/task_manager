@@ -17,7 +17,8 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
     author = create(:user)
     sign_in(author)
     assignee = create(:user)
-    task_attributes = attributes_for(:task).merge({ assignee_id: assignee.id })
+    task = create(:task)
+    task_attributes = attributes_for(:task).merge({ assignee_id: assignee.id, expired_at: task.expired_at })
     post :create, params: { task: task_attributes, format: :json }
     assert_response :created
 
@@ -32,7 +33,7 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
     author = create(:user)
     assignee = create(:user)
     task = create(:task, author: author)
-    task_attributes = attributes_for(:task).merge({ author_id: author.id, assignee_id: assignee.id }).stringify_keys
+    task_attributes = attributes_for(:task).merge({ author_id: author.id, assignee_id: assignee.id, expired_at: task.expired_at }).stringify_keys
 
     patch :update, params: { id: task.id, format: :json, task: task_attributes }
     assert_response :success
