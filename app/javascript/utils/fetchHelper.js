@@ -1,7 +1,7 @@
-import axios from "axios";
-import qs from "qs";
+import axios from 'axios';
+import qs from 'qs';
 
-import { camelize, decamelize } from "./keysConverter";
+import { camelize, decamelize } from './keysConverter';
 
 function authenticityToken() {
   const token = document.querySelector('meta[name="csrf-token"]');
@@ -10,10 +10,11 @@ function authenticityToken() {
 
 function headers() {
   return {
-    Accept: "*/*",
-    "Content-Type": "application/json",
-    "X-CSRF-Token": authenticityToken(),
-    "X-Requested-With": "XMLHttpRequest",
+    Accept: 'application/json',
+    // Accept: '*/*',
+    'Content-Type': 'application/json',
+    'X-CSRF-Token': authenticityToken(),
+    // 'X-Requested-With': 'XMLHttpRequest',
   };
 }
 
@@ -30,7 +31,7 @@ axios.interceptors.response.use(null, (error) => {
 
   if (error.response.status === 500) {
     return Promise.reject(
-      new Error("Something went wrong, please retry again")
+      new Error('Something went wrong, please retry again')
     );
   }
 
@@ -45,7 +46,7 @@ export default {
         paramsSerializer: (parameters) =>
           qs.stringify(parameters, { encode: false }),
       })
-      .then(camelize);
+      .then(camelize(params));
   },
 
   post(url, json) {
