@@ -4,6 +4,7 @@ import { propOr } from 'ramda';
 
 import Task from 'components/Task';
 import TasksRepository from '../../repositories/TasksRepository';
+import ColumnHeader from 'components/ColumnHeader';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
@@ -21,12 +22,15 @@ const initialBoard = {
     title: column.value,
     cards: [],
     meta: {},
+    hideButton: false,
   })),
 };
 
 const TaskBoard = () => {
   const [board, setBoard] = useState(initialBoard);
   const [boardCards, setBoardCards] = useState([]);
+  const [currentPage, setCurrentPage] = useState(2);
+  const [buttonState, setButtonState] = useState(false);
 
   const loadColumn = (state, page, perPage) =>
     TasksRepository.index({
@@ -44,6 +48,25 @@ const TaskBoard = () => {
     });
   };
 
+  const loadColumnMore = (state, page = 1, perPage = 10) => {
+    loadColumn(state, currentPage, perPage).then(({ data }) => {
+      if (data.meta.total_pages >= currentPage) {
+        setCurrentPage(data.meta.page + 1);
+        setBoardCards((prevState) => {
+          return {
+            ...prevState,
+            [state]: {
+              cards: prevState[state].cards.concat(data.items),
+              meta: data.meta,
+            },
+          };
+        });
+      } else {
+        setButtonState(true);
+      }
+    });
+  };
+
   const loadBoard = () => {
     STATES.map(({ key }) => loadColumnInitial(key));
   };
@@ -51,6 +74,7 @@ const TaskBoard = () => {
   const generateBoard = () => {
     const board = {
       columns: STATES.map(({ key, value }) => ({
+        key: value.toString() + key,
         id: key,
         title: value,
         cards: propOr({}, 'cards', boardCards[key]),
@@ -65,7 +89,16 @@ const TaskBoard = () => {
   useEffect(() => generateBoard(), [boardCards]);
 
   return (
-    <KanbanBoard renderCard={(card) => <Task task={card} />}>
+    <KanbanBoard
+      renderCard={(card) => <Task task={card} />}
+      renderColumnHeader={(column) => (
+        <ColumnHeader
+          column={column}
+          onLoadMore={loadColumnMore}
+          isButtonHidden={buttonState}
+        />
+      )}
+    >
       {board}
     </KanbanBoard>
   );
