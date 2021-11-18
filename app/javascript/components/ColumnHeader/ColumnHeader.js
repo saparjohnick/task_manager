@@ -13,9 +13,9 @@ const ColumnHeader = ({ column, onLoadMore, isButtonHidden }) => {
     id,
     title,
     cards,
-    meta: { totalCount, currentPage },
+    meta: { currentPage },
   } = column;
-
+  const totalCount = column.meta.total_count;
   const count = cards.length;
 
   const handleLoadMore = () => onLoadMore(id, currentPage + 1);

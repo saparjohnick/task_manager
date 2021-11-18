@@ -74,7 +74,6 @@ const TaskBoard = () => {
   const generateBoard = () => {
     const board = {
       columns: STATES.map(({ key, value }) => ({
-        key: value.toString() + key,
         id: key,
         title: value,
         cards: propOr({}, 'cards', boardCards[key]),
