@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import KanbanBoard from '@asseinfo/react-kanban';
 import { propOr } from 'ramda';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 import Task from 'components/Task';
 import TasksRepository from '../../repositories/TasksRepository';
 import ColumnHeader from 'components/ColumnHeader';
+import AddPopup from 'components/AddPopup';
+import TaskForm from 'forms/TaskForm';
+
+import useStyles from '../TaskBoard/useStyles';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
@@ -26,11 +32,19 @@ const initialBoard = {
   })),
 };
 
+const MODES = {
+  ADD: 'add',
+  NONE: 'none',
+};
+
 const TaskBoard = () => {
+  const styles = useStyles;
+
   const [board, setBoard] = useState(initialBoard);
   const [boardCards, setBoardCards] = useState([]);
   const [currentPage, setCurrentPage] = useState(2);
   const [buttonState, setButtonState] = useState(false);
+  const [mode, setMode] = useState(MODES.NONE);
 
   const loadColumn = (state, page, perPage) =>
     TasksRepository.index({
@@ -67,6 +81,37 @@ const TaskBoard = () => {
     });
   };
 
+  const loadBoard = () => {
+    STATES.map(({ key }) => loadColumnInitial(key));
+  };
+
+  const generateBoard = () => {
+    const board = {
+      columns: STATES.map(({ key, value }) => ({
+        id: key,
+        title: value,
+        cards: propOr({}, 'cards', boardCards[key]),
+        meta: propOr({}, 'meta', boardCards[key]),
+      })),
+    };
+
+    setBoard(board);
+  };
+
+  const handleOpenAddPopup = () => {
+    setMode(MODES.ADD);
+  };
+
+  const handleClose = () => {
+    setMode(MODES.NONE);
+  };
+  const handleTaskCreate = (params, currentPage, perPage = 10) => {
+    const attributes = TaskForm.attributesToSubmit(params);
+    return TasksRepository.create(attributes).then(({ data: { task } }) => {
+      loadColumn(task.state, currentPage, perPage).then(handleClose);
+    });
+  };
+
   const handleCardDragEnd = (task, source, destination) => {
     const transition = task.transitions.find(
       ({ to }) => destination.toColumnId === to
@@ -87,23 +132,6 @@ const TaskBoard = () => {
       });
   };
 
-  const loadBoard = () => {
-    STATES.map(({ key }) => loadColumnInitial(key));
-  };
-
-  const generateBoard = () => {
-    const board = {
-      columns: STATES.map(({ key, value }) => ({
-        id: key,
-        title: value,
-        cards: propOr({}, 'cards', boardCards[key]),
-        meta: propOr({}, 'meta', boardCards[key]),
-      })),
-    };
-
-    setBoard(board);
-  };
-
   useEffect(() => loadBoard(), []);
   useEffect(() => generateBoard(), [boardCards]);
 
@@ -111,12 +139,28 @@ const TaskBoard = () => {
     <KanbanBoard
       renderCard={(card) => <Task task={card} />}
       renderColumnHeader={(column) => (
-        <ColumnHeader
-          column={column}
-          onLoadMore={loadColumnMore}
-          isButtonHidden={buttonState}
-        />
+        <div>
+          <ColumnHeader
+            column={column}
+            onLoadMore={loadColumnMore}
+            isButtonHidden={buttonState}
+          />
+
+          <Fab
+            className={styles.addButton}
+            color="primary"
+            aria-label="add"
+            onClick={handleOpenAddPopup}
+          >
+            <AddIcon />
+          </Fab>
+
+          {mode === MODES.ADD && (
+            <AddPopup onCreateCard={handleTaskCreate} onClose={handleClose} />
+          )}
+        </div>
       )}
+      allowAddCard={{ on: 'bottom' }}
       onCardDragEnd={handleCardDragEnd}
     >
       {board}

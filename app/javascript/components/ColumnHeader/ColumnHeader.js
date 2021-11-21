@@ -19,6 +19,7 @@ const ColumnHeader = ({ column, onLoadMore, isButtonHidden }) => {
   const count = cards.length;
 
   const handleLoadMore = () => onLoadMore(id, currentPage + 1);
+
   function SmartButton(props) {
     if (isButtonHidden) {
       return <div></div>;
