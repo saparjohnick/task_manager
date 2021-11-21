@@ -1,7 +1,7 @@
 class Api::V1::ApplicationController < Api::ApplicationController
   respond_to :json
 
-  RANSACK_DEFAULT_SORT = 'id ASC'
+  RANSACK_DEFAULT_SORT = 'id asc'
 
   def build_meta(collection)
     {

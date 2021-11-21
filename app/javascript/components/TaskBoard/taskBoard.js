@@ -160,7 +160,6 @@ const TaskBoard = () => {
           )}
         </div>
       )}
-      allowAddCard={{ on: 'bottom' }}
       onCardDragEnd={handleCardDragEnd}
     >
       {board}
