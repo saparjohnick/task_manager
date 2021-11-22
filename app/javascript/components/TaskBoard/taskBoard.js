@@ -38,8 +38,6 @@ const MODES = {
 };
 
 const TaskBoard = () => {
-  const styles = useStyles;
-
   const [board, setBoard] = useState(initialBoard);
   const [boardCards, setBoardCards] = useState([]);
   const [currentPage, setCurrentPage] = useState(2);
@@ -135,35 +133,40 @@ const TaskBoard = () => {
   useEffect(() => loadBoard(), []);
   useEffect(() => generateBoard(), [boardCards]);
 
+  const styles = useStyles();
+
   return (
-    <KanbanBoard
-      renderCard={(card) => <Task task={card} />}
-      renderColumnHeader={(column) => (
-        <div>
-          <ColumnHeader
-            column={column}
-            onLoadMore={loadColumnMore}
-            isButtonHidden={buttonState}
-          />
+    <div>
+      <div className={styles.actions}>
+        <Fab
+          className={styles.addButton}
+          color="primary"
+          aria-label="add"
+          onClick={handleOpenAddPopup}
+        >
+          <AddIcon />
+        </Fab>
 
-          <Fab
-            className={styles.addButton}
-            color="primary"
-            aria-label="add"
-            onClick={handleOpenAddPopup}
-          >
-            <AddIcon />
-          </Fab>
-
-          {mode === MODES.ADD && (
-            <AddPopup onCreateCard={handleTaskCreate} onClose={handleClose} />
-          )}
-        </div>
-      )}
-      onCardDragEnd={handleCardDragEnd}
-    >
-      {board}
-    </KanbanBoard>
+        {mode === MODES.ADD && (
+          <AddPopup onCreateCard={handleTaskCreate} onClose={handleClose} />
+        )}
+      </div>
+      <KanbanBoard
+        renderCard={(card) => <Task task={card} />}
+        renderColumnHeader={(column) => (
+          <div>
+            <ColumnHeader
+              column={column}
+              onLoadMore={loadColumnMore}
+              isButtonHidden={buttonState}
+            />
+          </div>
+        )}
+        onCardDragEnd={handleCardDragEnd}
+      >
+        {board}
+      </KanbanBoard>
+    </div>
   );
 };
 
