@@ -4,13 +4,15 @@ import { propOr } from 'ramda';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
-import Task from 'components/Task';
 import TasksRepository from '../../repositories/TasksRepository';
+import Task from 'components/Task';
 import ColumnHeader from 'components/ColumnHeader';
 import AddPopup from 'components/AddPopup';
+import EditPopup from 'components/EditPopup';
+
 import TaskForm from 'forms/TaskForm';
 
-import useStyles from '../TaskBoard/useStyles';
+import useStyles from './useStyles';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
@@ -35,6 +37,7 @@ const initialBoard = {
 const MODES = {
   ADD: 'add',
   NONE: 'none',
+  EDIT: 'edit',
 };
 
 const TaskBoard = () => {
@@ -43,6 +46,7 @@ const TaskBoard = () => {
   const [currentPage, setCurrentPage] = useState(2);
   const [buttonState, setButtonState] = useState(false);
   const [mode, setMode] = useState(MODES.NONE);
+  const [openedTaskId, setOpenedTaskId] = useState(null);
 
   const loadColumn = (state, page, perPage) =>
     TasksRepository.index({
@@ -100,13 +104,21 @@ const TaskBoard = () => {
     setMode(MODES.ADD);
   };
 
+  const handleOpenEditPopup = (task) => {
+    setOpenedTaskId(task.id);
+    setMode(MODES.EDIT);
+  };
+
   const handleClose = () => {
+    setOpenedTaskId(null);
     setMode(MODES.NONE);
   };
+
   const handleTaskCreate = (params, currentPage, perPage = 10) => {
     const attributes = TaskForm.attributesToSubmit(params);
     return TasksRepository.create(attributes).then(({ data: { task } }) => {
-      loadColumn(task.state, currentPage, perPage).then(handleClose);
+      loadColumnInitial(task.state);
+      handleClose();
     });
   };
 
@@ -130,6 +142,26 @@ const TaskBoard = () => {
       });
   };
 
+  const loadTask = (id) => {
+    return TasksRepository.show(id).then(({ data: { task } }) => task);
+  };
+
+  const handleTaskUpdate = (task) => {
+    const attributes = TaskForm.attributesToSubmit(task);
+
+    return TasksRepository.update(task.id, attributes).then(() => {
+      loadColumnInitial(task.state);
+      handleClose();
+    });
+  };
+
+  const handleTaskDestroy = (task) => {
+    return TasksRepository.destroy(task.id).then(() => {
+      loadColumnInitial(task.state);
+      handleClose();
+    });
+  };
+
   useEffect(() => loadBoard(), []);
   useEffect(() => generateBoard(), [boardCards]);
 
@@ -150,9 +182,21 @@ const TaskBoard = () => {
         {mode === MODES.ADD && (
           <AddPopup onCreateCard={handleTaskCreate} onClose={handleClose} />
         )}
+
+        {mode === MODES.EDIT && (
+          <EditPopup
+            onLoadCard={loadTask}
+            onCardDestroy={handleTaskDestroy}
+            onCardUpdate={handleTaskUpdate}
+            onClose={handleClose}
+            cardId={openedTaskId}
+          />
+        )}
       </div>
       <KanbanBoard
-        renderCard={(card) => <Task task={card} />}
+        renderCard={(card) => (
+          <Task onClick={handleOpenEditPopup} task={card} />
+        )}
         renderColumnHeader={(column) => (
           <div>
             <ColumnHeader
