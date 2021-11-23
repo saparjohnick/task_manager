@@ -54,6 +54,10 @@ const EditPopup = ({
       alert(`Destrucion Failed! Error: ${error.message}`);
     });
   };
+
+  const handleChangeSelect = (fieldName) => (user) =>
+    onChange({ ...task, [fieldName]: user });
+
   const isLoading = isNil(task);
 
   return (
