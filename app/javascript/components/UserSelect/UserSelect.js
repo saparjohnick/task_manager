@@ -22,7 +22,6 @@ const UserSelect = ({
   helperText,
 }) => {
   const [isFocused, setFocus] = useState(false);
-  const [usersOptions, setUsersOptions] = useState(null);
   const styles = useStyles();
   const handleLoadOptions = (inputValue, page = 1) =>
     UsersRepository.index({
