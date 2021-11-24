@@ -1,4 +1,4 @@
-class Api::V1::UsersController < ApplicationController
+class Api::V1::UsersController < Api::V1::ApplicationController
   def show
     user = User.find(params[:id])
 
@@ -6,7 +6,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def index
-    users = User.ransack(ransack_params).result.page(page).per_page(per_page)
+    users = User.ransack(ransack_params).result.page(page).per(per_page)
 
     respond_with(users, each_serializer: UserSerializer, meta: build_meta(users), root: 'items')
   end

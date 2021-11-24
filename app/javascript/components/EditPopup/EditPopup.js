@@ -13,6 +13,8 @@ import Modal from '@material-ui/core/Modal';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Form from 'components/Form';
+import TaskPresenter from 'presenters/TaskPresenter';
+import UserPresenter from 'presenters/UserPresenter';
 
 import useStyles from './useStyles';
 
@@ -55,9 +57,6 @@ const EditPopup = ({
     });
   };
 
-  const handleChangeSelect = (fieldName) => (user) =>
-    onChange({ ...task, [fieldName]: user });
-
   const isLoading = isNil(task);
 
   return (
@@ -72,7 +71,7 @@ const EditPopup = ({
           title={
             isLoading
               ? 'Your task is loading. Please be patient.'
-              : `Task # ${task.id} [${task.name}]`
+              : TaskPresenter.fullTitle(task)
           }
         />
         <CardContent>
@@ -115,6 +114,8 @@ EditPopup.propTypes = {
   onCardDestroy: PropTypes.func.isRequired,
   onLoadCard: PropTypes.func.isRequired,
   onCardUpdate: PropTypes.func.isRequired,
+  task: TaskPresenter.shape(),
+  user: UserPresenter.shape(),
 };
 
 export default EditPopup;
