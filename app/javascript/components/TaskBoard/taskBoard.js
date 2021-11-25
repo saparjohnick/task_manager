@@ -30,7 +30,6 @@ const initialBoard = {
     title: column.value,
     cards: [],
     meta: {},
-    hideButton: false,
   })),
 };
 
@@ -43,8 +42,6 @@ const MODES = {
 const TaskBoard = () => {
   const [board, setBoard] = useState(initialBoard);
   const [boardCards, setBoardCards] = useState([]);
-  const [currentPage, setCurrentPage] = useState(2);
-  const [buttonState, setButtonState] = useState(false);
   const [mode, setMode] = useState(MODES.NONE);
   const [openedTaskId, setOpenedTaskId] = useState(null);
 
@@ -65,21 +62,16 @@ const TaskBoard = () => {
   };
 
   const loadColumnMore = (state, page = 1, perPage = 10) => {
-    loadColumn(state, currentPage, perPage).then(({ data }) => {
-      if (data.meta.total_pages >= currentPage) {
-        setCurrentPage(data.meta.page + 1);
-        setBoardCards((prevState) => {
-          return {
-            ...prevState,
-            [state]: {
-              cards: prevState[state].cards.concat(data.items),
-              meta: data.meta,
-            },
-          };
-        });
-      } else {
-        setButtonState(true);
-      }
+    loadColumn(state, page, perPage).then(({ data }) => {
+      setBoardCards((prevState) => {
+        return {
+          ...prevState,
+          [state]: {
+            cards: prevState[state].cards.concat(data.items),
+            meta: data.meta,
+          },
+        };
+      });
     });
   };
 
@@ -114,7 +106,7 @@ const TaskBoard = () => {
     setMode(MODES.NONE);
   };
 
-  const handleTaskCreate = (params, currentPage, perPage = 10) => {
+  const handleTaskCreate = (params, page, perPage = 10) => {
     const attributes = TaskForm.attributesToSubmit(params);
     return TasksRepository.create(attributes).then(({ data: { task } }) => {
       loadColumnInitial(task.state);
@@ -199,11 +191,7 @@ const TaskBoard = () => {
         )}
         renderColumnHeader={(column) => (
           <div>
-            <ColumnHeader
-              column={column}
-              onLoadMore={loadColumnMore}
-              isButtonHidden={buttonState}
-            />
+            <ColumnHeader column={column} onLoadMore={loadColumnMore} />
           </div>
         )}
         onCardDragEnd={handleCardDragEnd}
