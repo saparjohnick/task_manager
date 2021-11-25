@@ -4,7 +4,7 @@ import { propOr } from 'ramda';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
-import TasksRepository from '../../repositories/TasksRepository';
+import TasksRepository from 'repositories/TasksRepository';
 import Task from 'components/Task';
 import ColumnHeader from 'components/ColumnHeader';
 import AddPopup from 'components/AddPopup';
