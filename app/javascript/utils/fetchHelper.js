@@ -46,7 +46,7 @@ export default {
         paramsSerializer: (parameters) =>
           qs.stringify(parameters, { encode: false }),
       })
-      .then(camelize(params));
+      .then(camelize);
   },
 
   post(url, json) {
