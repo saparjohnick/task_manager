@@ -190,9 +190,7 @@ const TaskBoard = () => {
           <Task onClick={handleOpenEditPopup} task={card} />
         )}
         renderColumnHeader={(column) => (
-          <div>
-            <ColumnHeader column={column} onLoadMore={loadColumnMore} />
-          </div>
+          <ColumnHeader column={column} onLoadMore={loadColumnMore} />
         )}
         onCardDragEnd={handleCardDragEnd}
       >
