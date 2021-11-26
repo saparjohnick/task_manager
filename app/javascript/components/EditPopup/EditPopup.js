@@ -14,7 +14,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Form from 'components/Form';
 import TaskPresenter from 'presenters/TaskPresenter';
-import UserPresenter from 'presenters/UserPresenter';
 
 import useStyles from './useStyles';
 
@@ -114,8 +113,6 @@ EditPopup.propTypes = {
   onCardDestroy: PropTypes.func.isRequired,
   onLoadCard: PropTypes.func.isRequired,
   onCardUpdate: PropTypes.func.isRequired,
-  task: TaskPresenter.shape(),
-  user: UserPresenter.shape(),
 };
 
 export default EditPopup;
