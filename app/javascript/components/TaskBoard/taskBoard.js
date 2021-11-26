@@ -177,11 +177,11 @@ const TaskBoard = () => {
 
         {mode === MODES.EDIT && (
           <EditPopup
+            cardId={openedTaskId}
             onLoadCard={loadTask}
             onCardDestroy={handleTaskDestroy}
             onCardUpdate={handleTaskUpdate}
             onClose={handleClose}
-            cardId={openedTaskId}
           />
         )}
       </div>
