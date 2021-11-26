@@ -160,7 +160,7 @@ const TaskBoard = () => {
   const styles = useStyles();
 
   return (
-    <div>
+    <>
       <div className={styles.actions}>
         <Fab
           className={styles.addButton}
@@ -198,7 +198,7 @@ const TaskBoard = () => {
       >
         {board}
       </KanbanBoard>
-    </div>
+    </>
   );
 };
 
