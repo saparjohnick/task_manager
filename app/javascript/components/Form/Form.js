@@ -61,8 +61,13 @@ const Form = ({ errors, onChange, task }) => {
 
 Form.propTypes = {
   onChange: PropTypes.func.isRequired,
+  errors: PropTypes.shape({
+    name: PropTypes.arrayOf(PropTypes.string),
+    description: PropTypes.arrayOf(PropTypes.string),
+    author: PropTypes.arrayOf(PropTypes.string),
+    assignee: PropTypes.arrayOf(PropTypes.string),
+  }),
   task: TaskPresenter.shape().isRequired,
-  user: UserPresenter.shape(),
 };
 
 Form.defaultProps = {
