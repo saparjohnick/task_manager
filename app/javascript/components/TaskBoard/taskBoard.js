@@ -10,6 +10,7 @@ import ColumnHeader from 'components/ColumnHeader';
 import AddPopup from 'components/AddPopup';
 import EditPopup from 'components/EditPopup';
 
+import TaskPresenter from 'presenters/TaskPresenter';
 import TaskForm from 'forms/TaskForm';
 
 import useStyles from './useStyles';
@@ -198,6 +199,10 @@ const TaskBoard = () => {
       </KanbanBoard>
     </>
   );
+};
+
+TaskBoard.propTypes = {
+  task: TaskPresenter.shape().isRequired,
 };
 
 export default TaskBoard;
