@@ -1,3 +1,3 @@
-import TaskBoard from './TaskBoard.js';
+import TaskBoard from './taskBoard';
 
 export default TaskBoard;
