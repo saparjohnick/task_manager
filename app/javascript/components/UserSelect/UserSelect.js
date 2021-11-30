@@ -71,7 +71,6 @@ UserSelect.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.shape(),
   helperText: PropTypes.string,
-  user: UserPresenter.shape(),
 };
 
 export default UserSelect;

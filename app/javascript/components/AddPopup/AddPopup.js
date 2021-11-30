@@ -89,7 +89,6 @@ const AddPopup = ({ onClose, onCreateCard }) => {
 AddPopup.propTypes = {
   onClose: PropTypes.func.isRequired,
   onCreateCard: PropTypes.func.isRequired,
-  task: TaskPresenter.shape(),
 };
 
 export default AddPopup;
