@@ -14,11 +14,20 @@ import useStyles from './useStyles';
 
 const MODES = {
   ADD: 'add',
+  EDIT: 'edit',
   NONE: 'none',
 };
 
 const TaskBoard = () => {
-  const { board, loadBoard } = useTasks();
+  const {
+    board,
+    loadBoard,
+    createTask,
+    dragEndCard,
+    loadTask,
+    updateTask,
+    destroyTask,
+  } = useTasks();
   const [mode, setMode] = useState(MODES.NONE);
   const [openedTaskId, setOpenedTaskId] = useState(null);
   const styles = useStyles();
@@ -41,12 +50,37 @@ const TaskBoard = () => {
     setOpenedTaskId(null);
   };
 
-  const loadColumnMore = () => {};
-  const handleCardDragEnd = () => {};
-  const handleTaskCreate = () => {};
-  const handleTaskLoad = () => {};
-  const handleTaskUpdate = () => {};
-  const handleTaskDestroy = () => {};
+  const loadColumnMore = (state, page = 1, perPage = 10) => {
+    loadBoard();
+  };
+
+  const handleCardDragEnd = (task, source, destination) => {
+    dragEndCard(task, source, destination);
+    loadBoard();
+  };
+
+  const handleTaskCreate = (params, page, perPage = 10) => {
+    createTask(params);
+    loadBoard();
+    handleClose();
+  };
+
+  const handleTaskLoad = (id) => {
+    loadTask(id);
+  };
+
+  const handleTaskUpdate = (task) => {
+    updateTask(task);
+    loadBoard();
+    handleClose();
+  };
+
+  const handleTaskDestroy = (task) => {
+    destroyTask(task).then(() => {
+      loadBoard();
+      handleClose();
+    });
+  };
 
   return (
     <>

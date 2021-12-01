@@ -1,16 +1,25 @@
 import { useSelector } from 'react-redux';
 import { useTasksActions } from 'slices/tasksSlice';
-import { STATES } from 'presenters/TaskPresenter';
 
 const useTasks = () => {
   const board = useSelector((state) => state.tasksSlice.board);
-  const { loadBoard } = useTasksActions();
-
-  // const loadBoard = () => Promise.all(loadBoard);
+  const {
+    loadBoard,
+    createTask,
+    dragEndCard,
+    loadTask,
+    updateTask,
+    destroyTask,
+  } = useTasksActions();
 
   return {
     board,
     loadBoard,
+    createTask,
+    dragEndCard,
+    loadTask,
+    updateTask,
+    destroyTask,
   };
 };
 

@@ -24,14 +24,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
   const handleCreate = () => {
     setSaving(true);
 
-    onCreateCard(task).catch((error) => {
-      setSaving(false);
-      setErrors(error || {});
-
-      if (error instanceof Error) {
-        alert(`Creation Failed! Error: ${error.message}`);
-      }
-    });
+    onCreateCard(task);
   };
   const handleChangeTextField = (fieldName) => (event) =>
     changeTask({ ...task, [fieldName]: event.target.value });
