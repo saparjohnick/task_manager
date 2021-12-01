@@ -13,6 +13,7 @@ import Modal from '@material-ui/core/Modal';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Form from 'components/Form';
+import TaskPresenter from 'presenters/TaskPresenter';
 
 import useStyles from './useStyles';
 
@@ -54,6 +55,7 @@ const EditPopup = ({
       alert(`Destrucion Failed! Error: ${error.message}`);
     });
   };
+
   const isLoading = isNil(task);
 
   return (
@@ -68,7 +70,7 @@ const EditPopup = ({
           title={
             isLoading
               ? 'Your task is loading. Please be patient.'
-              : `Task # ${task.id} [${task.name}]`
+              : TaskPresenter.fullTitle(task)
           }
         />
         <CardContent>
