@@ -30,8 +30,7 @@ const EditPopup = ({
   const styles = useStyles();
 
   useEffect(() => {
-    onLoadCard(cardId);
-    setTask(cardId);
+    onLoadCard(cardId).then(setTask);
   }, []);
 
   const handleCardUpdate = () => {
@@ -80,11 +79,7 @@ const EditPopup = ({
               <CircularProgress />
             </div>
           ) : (
-            <Form
-              errors={errors}
-              onChange={setTask}
-              task={onLoadCard(cardId)}
-            />
+            <Form errors={errors} onChange={setTask} task={task} />
           )}
         </CardContent>
         <CardActions className={styles.actions}>
