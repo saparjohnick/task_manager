@@ -8,9 +8,9 @@ import MUITheme from '@mui/material';
 const App = () => {
   return (
     <Provider store={store}>
-      {/* <MUITheme> */}
-      <TaskBoard />
-      {/* </MUITheme> */}
+      <MUITheme>
+        <TaskBoard />
+      </MUITheme>
     </Provider>
   );
 };
