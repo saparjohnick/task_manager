@@ -3,14 +3,16 @@ import React from 'react';
 import store from './store';
 import { Provider } from 'react-redux';
 import TaskBoard from 'containers/TaskBoard';
-import MUITheme from '@mui/material';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+
+const theme = createTheme();
 
 const App = () => {
   return (
     <Provider store={store}>
-      <MUITheme>
+      <MuiThemeProvider theme={theme}>
         <TaskBoard />
-      </MUITheme>
+      </MuiThemeProvider>
     </Provider>
   );
 };

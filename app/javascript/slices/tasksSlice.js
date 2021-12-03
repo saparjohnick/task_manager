@@ -30,13 +30,22 @@ const tasksSlice = createSlice({
         cards: items,
         meta,
       });
+      return state;
+    },
+    loadColumnMoreSuccess(state, { payload }) {
+      const { items, meta, columnId } = payload;
+      const column = state.board.columns.find(propEq('id', columnId));
 
+      state.board = changeColumn(state.board, column, {
+        cards: column.cards.concat(items),
+        meta,
+      });
       return state;
     },
   },
 });
 
-const { loadColumnSuccess } = tasksSlice.actions;
+const { loadColumnSuccess, loadColumnMoreSuccess } = tasksSlice.actions;
 
 export const useTasksActions = () => {
   const dispatch = useDispatch();
@@ -50,7 +59,18 @@ export const useTasksActions = () => {
       dispatch(loadColumnSuccess({ ...data, columnId: state }));
     });
   };
+
   const loadBoard = () => STATES.map(({ key }) => loadColumn(key));
+
+  const loadColumnMore = (state, page = 1, perPage = 10) => {
+    TasksRepository.index({
+      q: { stateEq: state },
+      page,
+      perPage,
+    }).then(({ data }) => {
+      dispatch(loadColumnMoreSuccess({ ...data, columnId: state }));
+    });
+  };
 
   const createTask = (params, page = 1, perPage = 10) => {
     const attributes = TaskForm.attributesToSubmit(params);
@@ -78,9 +98,6 @@ export const useTasksActions = () => {
       loadColumn(destination.toColumnId);
       loadColumn(source.fromColumnId);
     });
-    // .catch((error) => {
-    //   alert(`Move failed! ${error.message}`);
-    // });
   };
 
   const loadTask = (id) => {
@@ -92,19 +109,20 @@ export const useTasksActions = () => {
 
     return TasksRepository.update(TaskPresenter.id(task), attributes).then(
       () => {
-        loadColumnInitial(TaskPresenter.state(task));
+        loadColumn(TaskPresenter.state(task));
       }
     );
   };
 
   const destroyTask = (task) => {
     return TasksRepository.destroy(TaskPresenter.id(task)).then(() => {
-      loadColumnInitial(TaskPresenter.state(task));
+      loadColumn(TaskPresenter.state(task));
     });
   };
 
   return {
     loadBoard,
+    loadColumnMore,
     createTask,
     dragEndCard,
     loadTask,

@@ -22,6 +22,7 @@ const TaskBoard = () => {
   const {
     board,
     loadBoard,
+    loadColumnMore,
     createTask,
     dragEndCard,
     loadTask,
@@ -50,8 +51,8 @@ const TaskBoard = () => {
     setOpenedTaskId(null);
   };
 
-  const loadColumnMore = (state, page = 1, perPage = 10) => {
-    loadBoard();
+  const handleLoadColumnMore = (state, page = 1, perPage = 10) => {
+    loadColumnMore(state, page, perPage);
   };
 
   const handleCardDragEnd = (task, source, destination) => {
@@ -77,7 +78,7 @@ const TaskBoard = () => {
 
   const handleTaskDestroy = (task) => {
     destroyTask(task).then(() => {
-      loadBoard();
+      loadColumn();
       handleClose();
     });
   };
@@ -100,7 +101,7 @@ const TaskBoard = () => {
           <Task onClick={handleOpenEditPopup} task={card} />
         )}
         renderColumnHeader={(column) => (
-          <ColumnHeader column={column} onLoadMore={loadColumnMore} />
+          <ColumnHeader column={column} onLoadMore={handleLoadColumnMore} />
         )}
       >
         {board}
