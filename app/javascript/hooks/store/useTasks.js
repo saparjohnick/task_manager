@@ -5,6 +5,7 @@ const useTasks = () => {
   const board = useSelector((state) => state.tasksSlice.board);
   const {
     loadBoard,
+    loadColumn,
     loadColumnMore,
     createTask,
     dragEndCard,
@@ -16,6 +17,7 @@ const useTasks = () => {
   return {
     board,
     loadBoard,
+    loadColumn,
     loadColumnMore,
     createTask,
     dragEndCard,

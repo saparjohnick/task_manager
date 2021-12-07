@@ -1,7 +1,8 @@
 import { propEq } from 'ramda';
 import { createSlice } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeColumn } from '@asseinfo/react-kanban';
+import _ from 'lodash';
 
 import TaskPresenter, { STATES } from 'presenters/TaskPresenter';
 import TaskForm from 'forms/TaskForm';
@@ -45,7 +46,8 @@ const tasksSlice = createSlice({
   },
 });
 
-const { loadColumnSuccess, loadColumnMoreSuccess } = tasksSlice.actions;
+const { loadColumnSuccess, loadColumnMoreSuccess, loadTaskSuccess } =
+  tasksSlice.actions;
 
 export const useTasksActions = () => {
   const dispatch = useDispatch();
@@ -101,7 +103,7 @@ export const useTasksActions = () => {
   };
 
   const loadTask = (id) => {
-    return TasksRepository.show(id).then(({ data: { task } }) => task);
+    return TasksRepository.show(id);
   };
 
   const updateTask = (task) => {
@@ -122,6 +124,7 @@ export const useTasksActions = () => {
 
   return {
     loadBoard,
+    loadColumn,
     loadColumnMore,
     createTask,
     dragEndCard,

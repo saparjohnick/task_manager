@@ -30,7 +30,11 @@ const EditPopup = ({
   const styles = useStyles();
 
   useEffect(() => {
-    onLoadCard(cardId).then(setTask);
+    // console.log(onLoadCard(cardId));
+    // console.log(onLoadCard(cardId).then(({ task }) => setTask(task)));
+    onLoadCard(cardId).then(({ data }) => {
+      setTask(data.task);
+    });
   }, []);
 
   const handleCardUpdate = () => {

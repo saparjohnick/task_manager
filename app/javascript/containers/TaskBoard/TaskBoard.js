@@ -7,8 +7,10 @@ import Task from 'components/Task';
 import AddPopup from 'components/AddPopup';
 import EditPopup from 'components/EditPopup';
 import ColumnHeader from 'components/ColumnHeader';
+import TaskPresenter from 'presenters/TaskPresenter';
 
 import useTasks from 'hooks/store/useTasks';
+import { useTasksActions } from 'slices/tasksSlice';
 
 import useStyles from './useStyles';
 
@@ -18,17 +20,21 @@ const MODES = {
   NONE: 'none',
 };
 
+const INITIAL_STATE = 'new_task';
+
 const TaskBoard = () => {
   const {
     board,
     loadBoard,
+    loadTask,
+    loadColumn,
     loadColumnMore,
     createTask,
     dragEndCard,
-    loadTask,
     updateTask,
     destroyTask,
   } = useTasks();
+
   const [mode, setMode] = useState(MODES.NONE);
   const [openedTaskId, setOpenedTaskId] = useState(null);
   const styles = useStyles();
@@ -57,28 +63,29 @@ const TaskBoard = () => {
 
   const handleCardDragEnd = (task, source, destination) => {
     dragEndCard(task, source, destination);
-    loadBoard();
+    loadColumn(source);
+    loadColumn(destination);
   };
 
   const handleTaskCreate = (params, page, perPage = 10) => {
     createTask(params);
-    loadBoard();
+    loadColumn(INITIAL_STATE);
     handleClose();
   };
 
   const handleTaskLoad = (id) => {
-    loadTask(id);
+    return loadTask(id);
   };
 
   const handleTaskUpdate = (task) => {
     updateTask(task);
-    loadBoard();
+    loadColumn(TaskPresenter.state(task));
     handleClose();
   };
 
   const handleTaskDestroy = (task) => {
     destroyTask(task).then(() => {
-      loadColumn();
+      loadColumn(TaskPresenter.state(task));
       handleClose();
     });
   };
@@ -112,11 +119,11 @@ const TaskBoard = () => {
       )}
       {mode === MODES.EDIT && (
         <EditPopup
+          cardId={openedTaskId}
           onLoadCard={handleTaskLoad}
           onCardDestroy={handleTaskDestroy}
           onCardUpdate={handleTaskUpdate}
           onClose={handleClose}
-          cardId={openedTaskId}
         />
       )}
     </>
