@@ -1,10 +1,6 @@
 name: Main
 
-on:
-  pull_request:
-    branches:
-      - 'develop'
-  [push]
+on: push
 
 jobs:
   build:
