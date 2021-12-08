@@ -28,6 +28,8 @@ gem 'responders'
 gem 'active_model_serializers'
 gem 'js-routes'
 gem 'webpacker-react'
+gem 'coveralls', require: false
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
