@@ -10,9 +10,9 @@ if ENV['COVERAGE']
   SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
   SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
   SimpleCov::Formatter::LcovFormatter.config do |c|
-    c.output_directory = 'tmp/' # default: "coverage/lcov"
+    c.output_directory = './' # default: "coverage/lcov"
     c.lcov_file_name = 'lcov.info' # default: "YOUR_PROJECT_NAME.lcov"
-    c.single_report_path = 'tmp/lcov.info'
+    c.single_report_path = './lcov.info'
   end
   SimpleCov.start
 end
