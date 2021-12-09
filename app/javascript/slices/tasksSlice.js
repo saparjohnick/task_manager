@@ -87,7 +87,7 @@ export const useTasksActions = () => {
   };
 
   const dragEndCard = (task, source, destination) => {
-    const transition = task.transitions.find(
+    const transition = TaskPresenter.transitions(task).find(
       ({ to }) => destination.toColumnId === to
     );
     if (!transition) {
