@@ -12,9 +12,7 @@ jobs:
         env:
           COVERAGE: true
           RAILS_ENV: test
-        run: |
-          docker-compose --file docker-compose.ci.yml run ci
-          docker-compose run rails test
+        run: docker-compose --file docker-compose.ci.yml run ci
 
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@1.1.3
