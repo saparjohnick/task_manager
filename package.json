@@ -4,9 +4,6 @@
   "scripts": {
     "lint": "node_modules/.bin/eslint app/javascript"
   },
-  "engines": {
-    "node": "12.x"
-  },
   "dependencies": {
     "@asseinfo/react-kanban": "^2.2.0",
     "@babel/preset-react": "^7.16.0",
