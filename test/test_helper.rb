@@ -3,7 +3,7 @@ require_relative '../config/environment'
 require 'rails/test_help'
 
 p ENV
-if ENV['CI']
+if ENV['COVERAGE']
   require 'simplecov'
   require 'simplecov-lcov'
 
