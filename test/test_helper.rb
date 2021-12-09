@@ -1,6 +1,6 @@
-require 'simplecov'
-
 if ENV['CI']
+  p 'IM HERE'
+  require 'simplecov'
   require 'simplecov-lcov'
 
   SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
@@ -10,9 +10,9 @@ if ENV['CI']
     c.lcov_file_name = 'lcov.info' # default: "YOUR_PROJECT_NAME.lcov"
     c.single_report_path = './lcov.info'
   end
+  SimpleCov.start
 end
 
-SimpleCov.start
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
