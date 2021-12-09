@@ -5,7 +5,6 @@ import { has } from 'ramda';
 import TextField from '@material-ui/core/TextField';
 
 import UserSelect from 'components/UserSelect';
-import UserPresenter from 'presenters/UserPresenter';
 import TaskPresenter from 'presenters/TaskPresenter';
 
 import useStyles from './useStyles';
