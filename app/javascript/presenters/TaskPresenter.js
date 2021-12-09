@@ -9,7 +9,7 @@ const TaskPresenter = new PropTypesPresenter(
     state: PropTypes.string,
     author: PropTypes.object,
     assignee: PropTypes.object,
-    transitions: PropTypes.object,
+    transitions: PropTypes.array,
   },
   {
     fullTitle(task) {

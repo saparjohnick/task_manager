@@ -20,14 +20,11 @@ const MODES = {
   NONE: 'none',
 };
 
-const INITIAL_STATE = 'new_task';
-
 const TaskBoard = () => {
   const {
     board,
     loadBoard,
     loadTask,
-    loadColumn,
     loadColumnMore,
     createTask,
     dragEndCard,
@@ -63,13 +60,10 @@ const TaskBoard = () => {
 
   const handleCardDragEnd = (task, source, destination) => {
     dragEndCard(task, source, destination);
-    loadColumn(source);
-    loadColumn(destination);
   };
 
   const handleTaskCreate = (params, page, perPage = 10) => {
     createTask(params);
-    loadColumn(INITIAL_STATE);
     handleClose();
   };
 
@@ -79,13 +73,11 @@ const TaskBoard = () => {
 
   const handleTaskUpdate = (task) => {
     updateTask(task);
-    loadColumn(TaskPresenter.state(task));
     handleClose();
   };
 
   const handleTaskDestroy = (task) => {
     destroyTask(task).then(() => {
-      loadColumn(TaskPresenter.state(task));
       handleClose();
     });
   };

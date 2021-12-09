@@ -75,14 +75,10 @@ export const useTasksActions = () => {
   };
 
   const createTask = (params, page = 1, perPage = 10) => {
+    const INITIAL_STATE = 'new_task';
     const attributes = TaskForm.attributesToSubmit(params);
     return TasksRepository.create(attributes).then(({ data }) => {
-      dispatch(
-        loadColumnSuccess({
-          ...data,
-          columnId: state,
-        })
-      );
+      loadColumn(INITIAL_STATE);
     });
   };
 
@@ -103,7 +99,7 @@ export const useTasksActions = () => {
   };
 
   const loadTask = (id) => {
-    return TasksRepository.show(id);
+    return TasksRepository.show(id).then(({ data: { task } }) => task);
   };
 
   const updateTask = (task) => {
