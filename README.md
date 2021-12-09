@@ -1,6 +1,6 @@
 # README
 
-[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fatrox%2Fsync-dotenv%2Fbadge&style=for-the-badge)](https://actions-badge.atrox.dev/atrox/sync-dotenv/goto)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fsaparjohnick%2Ftask_manager%2Fbadge%3Fref%3Ddevelop&style=for-the-badge)](https://actions-badge.atrox.dev/saparjohnick/task_manager/goto?ref=develop)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
