@@ -3,8 +3,12 @@ version: '2'
 services:
   db:
     image: postgres:10.3-alpine
+    ports:
+      - 5432:5432
   ci:
     build: .
+    ports:
+      - 3000:3000
     depends_on:
       - db
     environment:
