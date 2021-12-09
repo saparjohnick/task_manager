@@ -1,5 +1,8 @@
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+require 'rails/test_help'
+
 if ENV['CI']
-  p 'IM HERE'
   require 'simplecov'
   require 'simplecov-lcov'
 
@@ -12,12 +15,6 @@ if ENV['CI']
   end
   SimpleCov.start
 end
-
-
-ENV['RAILS_ENV'] ||= 'test'
-require_relative '../config/environment'
-require 'rails/test_help'
-
 
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
