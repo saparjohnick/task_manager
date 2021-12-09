@@ -1,8 +1,7 @@
 import { propEq } from 'ramda';
 import { createSlice } from '@reduxjs/toolkit';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { changeColumn } from '@asseinfo/react-kanban';
-import _ from 'lodash';
 
 import TaskPresenter, { STATES } from 'presenters/TaskPresenter';
 import TaskForm from 'forms/TaskForm';
