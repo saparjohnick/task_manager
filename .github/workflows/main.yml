@@ -21,5 +21,3 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: tmp/lcov.info
-        run: |
-          coveralls
