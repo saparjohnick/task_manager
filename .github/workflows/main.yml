@@ -11,9 +11,7 @@ jobs:
       - name: Cache multiple paths
         uses: actions/cache@v2
         with:
-          path: |
-            tmp
-          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+          path: tmp
 
       - name: Run tests
         env:
