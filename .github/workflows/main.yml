@@ -8,13 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Cache tmp
-        uses: actions/cache@v2
-        with:
-          # npm cache files are stored in `~/.tmp` on Linux/macOS
-          path: tmp
-          key: lcov.info
-
       - name: Run tests
         env:
           COVERAGE: true
@@ -23,6 +16,10 @@ jobs:
           docker-compose --file docker-compose.ci.yml run ci
           sh -c "ls -a tmp"
           sh -c "ls -a"
+      - uses: actions/upload-artifact@v2
+        with:
+          name: lcov.info
+          path: tmp/lcov.info
 
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@1.1.3
