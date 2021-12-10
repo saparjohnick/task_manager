@@ -10,13 +10,10 @@ jobs:
 
       - name: Cache tmp
         uses: actions/cache@v2
-        env:
-          cache-name: cache-tmp
         with:
           # npm cache files are stored in `~/.tmp` on Linux/macOS
           path: tmp
-          key: tmp
-          restore-keys: tmp
+          key: lcov.info
 
       - name: Run tests
         env:
