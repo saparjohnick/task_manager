@@ -8,10 +8,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Cache multiple paths
+      - name: Cache tmp
         uses: actions/cache@v2
+        env:
+          cache-name: cache-tmp
         with:
-          path: tmp
+          # npm cache files are stored in `~/.tmp` on Linux/macOS
+          path: ~/.tmp
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: Run tests
         env:
