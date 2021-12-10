@@ -12,14 +12,7 @@ jobs:
         env:
           COVERAGE: true
           RAILS_ENV: test
-        run: |
-          docker-compose --file docker-compose.ci.yml run ci
-          sh -c "ls -a ../"
-          sh -c "ls -a"
-      - uses: actions/upload-artifact@v2
-        with:
-          name: lcov.info
-          path: tmp/lcov.info
+        run: docker-compose --file docker-compose.ci.yml run ci
 
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@1.1.3
