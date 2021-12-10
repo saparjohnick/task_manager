@@ -14,8 +14,7 @@ jobs:
           RAILS_ENV: test
         run: |
           docker-compose --file docker-compose.ci.yml run ci
-          sh -c "ls -of storage"
-          sh -c "ls -of test"
+          sh -c "find . -name 'lcov.info'"
 
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@1.1.3
