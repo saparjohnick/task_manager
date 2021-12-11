@@ -12,4 +12,9 @@ services:
       - RAILS_ENV
       - DATABASE_HOST=db
       - DATABASE_USERNAME=postgres
-    command: sh -c "bundle exec rails webpacker:install && bundle exec rails db:create db:migrate && bundle exec rake test && ls -a" && docker cp web:coverage/lcov/lcov.info coverage/lcov/lcov.info
+    command: sh -c "bundle exec rails webpacker:install && bundle exec rails db:create db:migrate && bundle exec rake test"
+
+  save_lcov:
+    depends_on:
+      - ci
+    command: docker cp web:coverage/lcov/lcov.info coverage/lcov/lcov.info
