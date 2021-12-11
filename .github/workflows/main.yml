@@ -16,9 +16,6 @@ jobs:
           docker-compose --file docker-compose.ci.yml run --service-ports ci
           sh -c 'ls -a'
 
-      - name: 'debugging'
-        run: sh -c 'ls -a'
-
       - name: Upload lcov.info
         uses: actions/upload-artifact@v2
         with:
