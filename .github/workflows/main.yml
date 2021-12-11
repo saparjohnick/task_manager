@@ -12,7 +12,9 @@ jobs:
         env:
           COVERAGE: true
           RAILS_ENV: test
-        run: docker-compose --file docker-compose.ci.yml run ci
+        run: |
+          docker-compose --file docker-compose.ci.yml run --service-ports ci
+          sh -c 'ls -a'
 
       - name: Upload lcov.info
         uses: actions/upload-artifact@v2
