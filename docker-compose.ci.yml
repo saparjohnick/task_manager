@@ -5,6 +5,8 @@ services:
     image: postgres:10.3-alpine
   ci:
     build: .
+    volumes: &web-volumes
+      - .:/task_manager
     depends_on:
       - db
     environment:
@@ -13,9 +15,3 @@ services:
       - DATABASE_HOST=db
       - DATABASE_USERNAME=postgres
     command: sh -c "bundle exec rails webpacker:install && bundle exec rails db:create db:migrate && bundle exec rake test"
-
-  save_lcov:
-    build: .
-    depends_on:
-      - ci
-    command: docker cp web:coverage/lcov/lcov.info coverage/lcov/lcov.info
