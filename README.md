@@ -2,7 +2,7 @@
 
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fatrox%2Fsync-dotenv%2Fbadge&style=for-the-badge)](https://actions-badge.atrox.dev/atrox/sync-dotenv/goto)
 
-[![Coverage Status](https://coveralls.io/repos/github/saparjohnick/task_manager/badge.svg?branch=feature/coveralls)](https://coveralls.io/github/saparjohnick/task_manager?branch=feature/coveralls)
+[![Coverage Status](https://coveralls.io/repos/github/saparjohnick/task_manager/badge.svg?branch=feature/coveralls)](https://coveralls.io/github/saparjohnick/task_manager?branch=develop)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
