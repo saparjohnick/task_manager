@@ -28,3 +28,4 @@ jobs:
           heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
         env:
           HD_RAILS_ENV: production
+          HD_NODE_ENV: production
