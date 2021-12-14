@@ -23,7 +23,6 @@ jobs:
       - name: Deploying to heroku
         env:
           HD_RAILS_ENV: production
-          HD_NODE_ENV: production
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
