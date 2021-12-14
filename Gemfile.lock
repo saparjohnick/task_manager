@@ -7,6 +7,12 @@ GIT
       activesupport (>= 5.2.4)
       i18n
 
+GIT
+  remote: https://github.com/sharpstone/rack-timeout.git
+  revision: f4b14a534b37d425ec4dba10d9cacf29ba012f9f
+  specs:
+    rack-timeout (0.6.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -301,6 +307,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
+  rack-timeout!
   rails (~> 6.1.4, >= 6.1.4.1)
   ransack!
   responders
