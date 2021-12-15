@@ -31,7 +31,7 @@ jobs:
             RAILS_ENV
             NODE_ENV
             SECRET_KEY_BASE
-          env:
-            SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
-            RAILS_ENV: production
-            NODE_ENV: production
+        env:
+          SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
+          RAILS_ENV: production
+          NODE_ENV: production
