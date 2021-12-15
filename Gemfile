@@ -9,6 +9,7 @@ gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
+gem 'rake', '~> 13.0.6'
 # gem 'rack-timeout', github: 'sharpstone/rack-timeout'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
