@@ -16,6 +16,8 @@ services:
       - db
     environment: &web-environment
       RAILS_ENV: development
+      NODE_ENV: development
+      BABEL_ENV: development
       BUNDLE_PATH: /bundle_cache
       GEM_HOME: /bundle_cache
       GEM_PATH: /bundle_cache
