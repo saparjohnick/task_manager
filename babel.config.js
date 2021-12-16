@@ -16,37 +16,7 @@ module.exports = function (api) {
   }
 
   return {
-    presets: [
-      '@babel/preset-env',
-      '@babel/preset-react',
-      isTestEnv && [
-        '@babel/preset-env',
-        {
-          targets: {
-            node: 'current',
-          },
-          modules: 'commonjs',
-        },
-        '@babel/preset-react',
-      ],
-      (isProductionEnv || isDevelopmentEnv) && [
-        '@babel/preset-env',
-        {
-          forceAllTransforms: true,
-          useBuiltIns: 'entry',
-          corejs: 3,
-          modules: false,
-          exclude: ['transform-typeof-symbol'],
-        },
-      ],
-      [
-        '@babel/preset-react',
-        {
-          development: isDevelopmentEnv || isTestEnv,
-          useBuiltIns: true,
-        },
-      ],
-    ].filter(Boolean),
+    presets: ['@babel/preset-env', '@babel/preset-react'],
     plugins: [
       '@babel/plugin-syntax-jsx',
       'babel-plugin-macros',
