@@ -11,7 +11,6 @@ module TaskManager
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
     config.assets.paths << Rails.root.join('node_modules')
-    config.web_console.whitelisted_ips = '178.70.129.16'
     config.hosts << "task-manager-dualboot.herokuapp.com"
     # Configuration for the application, engines, and railties goes here.
     #
