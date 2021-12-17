@@ -8,14 +8,14 @@ body {
   flex: 1 0 auto;
 }
 
-.page_content {
+.page-content {
   padding: 20px;
 }
 
-.page_content {
+.page-content {
   padding: 20px;
 }
 
-.page_content .mdl-textblock {
+.mdl-textfield {
   display: block;
 }
