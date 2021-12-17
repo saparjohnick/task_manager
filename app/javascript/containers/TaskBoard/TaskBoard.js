@@ -20,8 +20,6 @@ const MODES = {
   NONE: 'none',
 };
 
-const INITIAL_STATE = 'new_task';
-
 const TaskBoard = () => {
   const {
     board,
@@ -69,7 +67,6 @@ const TaskBoard = () => {
 
   const handleTaskCreate = (params, page, perPage = 10) => {
     createTask(params);
-    loadColumn(INITIAL_STATE);
     handleClose();
   };
 

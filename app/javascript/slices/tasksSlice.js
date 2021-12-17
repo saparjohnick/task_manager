@@ -46,8 +46,7 @@ const tasksSlice = createSlice({
   },
 });
 
-const { loadColumnSuccess, loadColumnMoreSuccess, loadTaskSuccess } =
-  tasksSlice.actions;
+const { loadColumnSuccess, loadColumnMoreSuccess } = tasksSlice.actions;
 
 export const useTasksActions = () => {
   const dispatch = useDispatch();
@@ -76,7 +75,10 @@ export const useTasksActions = () => {
 
   const createTask = (params, page = 1, perPage = 10) => {
     const attributes = TaskForm.attributesToSubmit(params);
+    const NEW_TASK_COLUMN = 'new_task';
+
     return TasksRepository.create(attributes).then(({ data }) => {
+      loadColumn(NEW_TASK_COLUMN);
       dispatch(
         loadColumnSuccess({
           ...data,
