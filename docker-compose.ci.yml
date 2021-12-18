@@ -7,6 +7,7 @@ services:
     build: .
     volumes: &web-volumes
       - .:/task_manager
+      - ~/.bash_history:/root/.bash_history
     depends_on:
       - db
     environment:
