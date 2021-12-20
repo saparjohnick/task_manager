@@ -43,6 +43,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rubocop'
   gem 'faker'
+  gem 'letter_opener'
+  gem 'letter_opener_web'
 end
 
 group :development do
