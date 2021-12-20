@@ -1,0 +1,7 @@
+h1 Reset Password
+
+= form_with url: password_resets_path, method: :post do |f|
+  p
+    = f.email_field :email, class: 'mdl-textfield__input'
+  p
+    = f.submit "Reset Password", class: 'mdl-button mdl-js-button mdl-button--raised'
