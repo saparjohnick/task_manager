@@ -16,7 +16,9 @@ end
 
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
+  include ActionMailer::TestHelper
   include AuthHelper
+  
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
 
