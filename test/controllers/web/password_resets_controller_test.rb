@@ -1,8 +1,8 @@
 require "test_helper"
 
-class PasswordResetsControllerTest < ActionDispatch::IntegrationTest
+class Web::PasswordResetsControllerTest < ActionController::TestCase
   test "should get new" do
-    get password_resets_new_url
+    get :new
     assert_response :success
   end
 end
