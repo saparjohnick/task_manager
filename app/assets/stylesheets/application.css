@@ -19,3 +19,7 @@ body {
 .mdl-textfield {
   display: block;
 }
+
+.recovery-password {
+  width: 300px;
+}
