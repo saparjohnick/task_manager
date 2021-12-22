@@ -34,3 +34,5 @@ jobs:
           SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
           RAILS_ENV: production
           NODE_ENV: production
+      - name: Post-deployment
+        run: bundle exec bin/rails db:migrate
