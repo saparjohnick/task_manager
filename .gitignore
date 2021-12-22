@@ -37,3 +37,4 @@ yarn-debug.log*
 
 .vscode
 coverage
+app/javascript/packs/hello_react.jsx
