@@ -11,6 +11,8 @@ import WebpackerReact from 'webpacker-react';
 
 import App from '../App';
 
+import '../../assets/stylesheets/application.css';
+
 WebpackerReact.setup({ App });
 
 Rails.start();
