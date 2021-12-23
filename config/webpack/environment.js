@@ -1,13 +1,14 @@
-const { environment } = require('@rails/webpacker');
+const { webpackConfig, merge } = require('@rails/webpacker');
 
-environment.config.merge({
+const customConfig = {
+  resolve: {
+    extensions: ['.css'],
+  },
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
     maxAssetSize: 512000,
   },
-});
+};
 
-module.exports = environment;
-
-environment.loaders.delete('nodeModules');
+module.exports = merge(webpackConfig, customConfig);
