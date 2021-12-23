@@ -26,7 +26,6 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
           usedocker: true
-          dontuseforce: 1
           docker_build_args: |
             RAILS_ENV
             NODE_ENV
