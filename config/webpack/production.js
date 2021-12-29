@@ -3,13 +3,13 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const environment = require('./environment');
 
-environment.plugins.append(
-  'BundleAnalyzer',
-  new BundleAnalyzerPlugin({
-    analyzerMode: 'static',
-    openAnalyzer: true,
-  })
-);
+// environment.plugins.append(
+//   'BundleAnalyzer',
+//   new BundleAnalyzerPlugin({
+//     analyzerMode: 'static',
+//     openAnalyzer: true,
+//   })
+// );
 
 const config = environment.toWebpackConfig();
 config.devtool = 'none';
