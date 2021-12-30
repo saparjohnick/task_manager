@@ -6,8 +6,7 @@ services:
   ci:
     build: .
     volumes: &web-volumes
-      - &app-volume .:/task_manager:cached
-      # - .:/task_manager
+      - .:/task_manager
       - ~/.ssh:/root/.ssh
       - ~/.bash_history:/root/.bash_history
       - &bundle-cache-volume bundle_cache:/bundle_cache
