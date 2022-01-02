@@ -21,7 +21,3 @@ body {
 .mdl-textfield {
   display: block;
 }
-
-.mdl-textfield__input.recovery-password {
-  width: 400px;
-}
