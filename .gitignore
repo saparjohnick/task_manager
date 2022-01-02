@@ -37,5 +37,7 @@ yarn-debug.log*
 
 .vscode
 coverage
+
 app/javascript/packs/hello_react.jsx
 /hello_react.jsx
+.DS_Store

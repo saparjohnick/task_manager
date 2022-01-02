@@ -1,8 +1,7 @@
 import { propEq } from 'ramda';
 import { createSlice } from '@reduxjs/toolkit';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { changeColumn } from '@asseinfo/react-kanban';
-import _ from 'lodash';
 
 import TaskPresenter, { STATES } from 'presenters/TaskPresenter';
 import TaskForm from 'forms/TaskForm';
@@ -89,7 +88,7 @@ export const useTasksActions = () => {
   };
 
   const dragEndCard = (task, source, destination) => {
-    const transition = task.transitions.find(
+    const transition = TaskPresenter.transitions(task).find(
       ({ to }) => destination.toColumnId === to
     );
     if (!transition) {
@@ -105,7 +104,7 @@ export const useTasksActions = () => {
   };
 
   const loadTask = (id) => {
-    return TasksRepository.show(id);
+    return TasksRepository.show(id).then(({ data: { task } }) => task);
   };
 
   const updateTask = (task) => {
