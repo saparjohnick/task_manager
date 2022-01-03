@@ -2,7 +2,12 @@ version: '2'
 
 services:
   db:
-    image: postgres:10.3-alpine
+    image: postgres:11.4
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
   ci:
     build: .
     volumes: &web-volumes
@@ -17,5 +22,6 @@ services:
       - DATABASE_HOST=db
       - DATABASE_USERNAME=postgres
     command: sh -c "bundle exec rails webpacker:install && bundle exec rails db:create db:migrate && bundle exec rake test"
+
 volumes:
   bundle_cache:
