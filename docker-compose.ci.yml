@@ -3,16 +3,11 @@ version: '2'
 services:
   db:
     image: postgres:10.3-alpine
-    ports:
-    - 5432:5432
-    environment:
-      POSTGRES_DB: task_manager_test
   ci:
     build: .
     volumes: &web-volumes
       - .:/task_manager
       - ~/.bash_history:/root/.bash_history
-      - &bundle-cache-volume bundle_cache:/bundle_cache
     depends_on:
       - db
     environment:
@@ -21,5 +16,4 @@ services:
       - DATABASE_HOST=db
       - DATABASE_USERNAME=postgres
     command: sh -c "bundle exec rails webpacker:install && bundle exec rails db:create db:migrate && bundle exec rake test"
-volumes:
-  bundle_cache:
+    
