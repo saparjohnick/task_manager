@@ -11,6 +11,7 @@ Rails.application.configure do
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
+  config.active_record.logger = nil
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
@@ -23,6 +24,7 @@ Rails.application.configure do
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = true
+  config.serve_static_assets = true
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
@@ -63,16 +65,6 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "task_manager_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: ENV['HEROKU_DOMAIN'] }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-      :address => "smtp.gmail.com",
-      :port => 587,
-      :authentication => :plain,
-      :user_name => ENV['GMAIL_SMTP_USER'],
-      :password => ENV['GMAIL_SMTP_PASSWORD'],
-      :enable_starttls_auto => true
-    }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
