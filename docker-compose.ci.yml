@@ -8,31 +8,12 @@ services:
       - ~/.bash_history:/root/.bash_history
     depends_on:
       - db
-      - redis
-      - sidekiq
     environment: &ci-environment
       - COVERAGE
       - RAILS_ENV
       - DATABASE_HOST=db
       - DATABASE_USERNAME=postgres
-      - REDIS_URL=redis://redis
     command: sh -c "bundle exec rails webpacker:install:react && bundle exec rails db:create db:migrate && bundle exec rake test"
   
   db:
     image: postgres:10.3-alpine
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-
-  redis:
-    image: redis:5.0.9-alpine
-  
-  sidekiq:
-    build: .
-    command: bundle exec sidekiq -C /task_manager/config/sidekiq.yml
-    environment: *ci-environment
-    volumes: *web-volumes
-    depends_on:
-      - redis
