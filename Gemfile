@@ -31,6 +31,7 @@ gem 'webpacker-react'
 gem 'rollbar'
 gem 'newrelic_rpm'
 gem 'sidekiq'
+gem 'sidekiq-failures'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
