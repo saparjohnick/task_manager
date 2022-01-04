@@ -28,4 +28,4 @@ services:
       - DATABASE_USERNAME=postgres
       - REDIS_URL=redis://redis
 
-    command: sh -c "bundle exec rails webpacker:install:react && bundle exec rails db:create db:migrate && bundle exec rake test"
+    command: sh -c "bundle exec rails webpacker:install && bundle exec rails db:create db:migrate && bundle exec rake test"
