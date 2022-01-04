@@ -3,6 +3,23 @@ version: '2'
 services:
   db:
     image: postgres:10.3-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  redis:
+    image: redis:5.0.9-alpine
+  
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq -C /task_manager/config/sidekiq.yml
+    environment: *web-environment
+    volumes: *web-volumes
+    depends_on:
+      - redis
+
   ci:
     build: .
     volumes: &web-volumes
@@ -10,6 +27,8 @@ services:
       - ~/.bash_history:/root/.bash_history
     depends_on:
       - db
+      - redis
+      - sidekiq
     environment:
       - COVERAGE
       - RAILS_ENV
