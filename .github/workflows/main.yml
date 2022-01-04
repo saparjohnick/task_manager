@@ -19,6 +19,11 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: coverage/lcov/lcov.info
 
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.4.0
+        with:
+          redis-version: ${{ matrix.redis-version }}
+
       - name: Deploying to heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
