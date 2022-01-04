@@ -3,10 +3,6 @@ version: '2'
 services:
   db:
     image: postgres:10.3-alpine
-
-  redis:
-    image: redis:5.0.9-alpine
-  
   ci:
     build: .
     volumes: &web-volumes
@@ -14,12 +10,9 @@ services:
       - ~/.bash_history:/root/.bash_history
     depends_on:
       - db
-      - redis
     environment: &ci-environment
       - COVERAGE
       - RAILS_ENV
       - DATABASE_HOST=db
       - DATABASE_USERNAME=postgres
-      - REDIS_URL=redis://redis
-
     command: sh -c "bundle exec rails webpacker:install && bundle exec rails db:create db:migrate && bundle exec rake test"
