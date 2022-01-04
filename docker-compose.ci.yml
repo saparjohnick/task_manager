@@ -14,6 +14,8 @@ services:
       - ~/.bash_history:/root/.bash_history
     depends_on:
       - db
+      - redis
+      - sidekiq
     environment: &ci-environment
       - COVERAGE
       - RAILS_ENV
