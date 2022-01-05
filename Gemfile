@@ -40,9 +40,7 @@ gem 'sidekiq-throttled'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-group :production do
-  gem 'sidekiq-unique-jobs', '~> 6.0.13'
-end
+gem 'sidekiq-unique-jobs', '~> 7.1.12'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
