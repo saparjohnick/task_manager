@@ -26,7 +26,9 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
           usedocker: true
-          docker_heroku_process_type: web, worker
+          procfile: |
+            web: bundle exec puma -C config/puma.rb
+            worker: bundle exec sidekiq -C /config/sidekiq.yml
           docker_build_args: |
             RAILS_ENV
             NODE_ENV
