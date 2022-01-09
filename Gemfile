@@ -32,8 +32,8 @@ gem 'rollbar'
 gem 'newrelic_rpm'
 gem 'sidekiq'
 gem 'sidekiq-failures'
-# gem 'sidekiq-throttled'
-gem 'sidekiq-unique-jobs', '7.1.10'
+gem 'sidekiq-throttled'
+# gem 'sidekiq-unique-jobs', '7.1.10'
 
 
 # Use Active Storage variant
