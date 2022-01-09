@@ -3,4 +3,6 @@ build:
     web: Dockerfile
 run:
   web: bundle exec puma -C config/puma.rb
-  worker: bundle exec sidekiq
+  worker:
+    command: bundle exec sidekiq
+    image: web
