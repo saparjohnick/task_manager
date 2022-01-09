@@ -17,6 +17,7 @@ services:
       - RAILS_ENV
       - DATABASE_HOST=db
       - DATABASE_USERNAME=postgres
+      - NODE_OPTIONS=--max-old-space-size=8192
     command: sh -c "rails assets:precompile && bundle exec rails db:create db:migrate && bundle exec rake test"
   
   redis:

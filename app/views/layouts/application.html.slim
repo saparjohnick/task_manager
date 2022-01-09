@@ -6,11 +6,23 @@ html lang="en"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     title= content_for?(:title) ? yield(:title) : "Task Manager"
     link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
-    = stylesheet_link_tag "application", media: "all"
     = csrf_meta_tags
 
+    - if Rails.env.development? || Rails.env.test?
+      = stylesheet_link_tag "application", media: "all"
+
+    - if Rails.env.production?
+      = stylesheet_packs_with_chunks_tag "application", media: "all"
+
+
+
   body
-    = javascript_pack_tag 'application'
+    - if Rails.env.development? || Rails.env.test?
+      = javascript_packs_with_chunks_tag "application", media: "all"
+
+    - if Rails.env.production?
+      = javascript_include_tag "application", media: "all"
+
     header.mdl-layout__header
       .mdl-layout__header-row
         .material-icons tab
