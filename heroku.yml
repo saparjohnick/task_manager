@@ -5,6 +5,5 @@ build:
 run:
   web: bundle exec puma -C config/puma.rb
   worker:
-  # worker:
-  #   command: bundle exec sidekiq
-  #   image: web
+    command: bundle exec sidekiq
+    image: web
