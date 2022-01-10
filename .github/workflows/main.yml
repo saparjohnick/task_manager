@@ -25,6 +25,7 @@ jobs:
           heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
           usedocker: true
           docker_heroku_process_type: worker
+          procfile: bundle exec sidekiq -C config/sidekiq.yml
           docker_build_args: |
             SECRET_KEY_BASE
 
