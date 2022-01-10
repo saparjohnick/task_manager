@@ -24,19 +24,9 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
           usedocker: true
+          docker_heroku_process_type: worker
           docker_build_args: |
-            RAILS_ENV
-            NODE_ENV
             SECRET_KEY_BASE
 
         env:
           SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
-          RAILS_ENV: production
-          NODE_ENV: production
-      - name: Deploy Multiple Docker Images to Heroku Apps with Logs
-        uses: pysan3/docker-compose-multiple-apps-heroku-deploy@v6.5
-        with:
-          email: ${{ secrets.HEROKU_EMAIL }} # your heroku email
-          api_key: ${{ secrets.HEROKU_API_KEY }} # your  heroku api key
-          docker_compose_file: 'docker-compose.yml' # set the path to the folder where the docker-compose file is located
-          heroku_apps: '[{"appname":"task_manager","apptype":"web"},{"appname":"task_manager","apptype":"worker"}]' # List of Docker Image name, Heroku app and Heroku app type
