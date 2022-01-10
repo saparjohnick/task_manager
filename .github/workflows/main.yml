@@ -25,7 +25,7 @@ jobs:
           heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
           usedocker: true
           stack: container
-          docker_heroku_process_type: web worker --recursive
+          docker_heroku_process_type: web, worker --recursive
           docker_build_args: |
             SECRET_KEY_BASE
 
