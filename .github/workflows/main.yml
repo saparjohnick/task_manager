@@ -25,8 +25,20 @@ jobs:
           heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
           usedocker: true
           stack: container
+          docker_heroku_process_type: web
+          docker_build_args: |
+            SECRET_KEY_BASE
+
+      - name: Worker
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
+          heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
+          usedocker: true
+          stack: container
           docker_heroku_process_type: worker
-          procfile: 'bundle exec sidekiq -C config/sidekiq.yml'
+          appdir: worker
           docker_build_args: |
             SECRET_KEY_BASE
 
