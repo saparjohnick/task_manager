@@ -23,13 +23,13 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
-          # usedocker: true
-          # docker_build_args: |
-          #   RAILS_ENV
-          #   NODE_ENV
-          #   SECRET_KEY_BASE
+          usedocker: true
+          docker_build_args: |
+            RAILS_ENV
+            NODE_ENV
+            SECRET_KEY_BASE
 
-        # env:
-        #   SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
-        #   RAILS_ENV: production
-        #   NODE_ENV: production
+        env:
+          SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
+          RAILS_ENV: production
+          NODE_ENV: production
