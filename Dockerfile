@@ -22,4 +22,4 @@ ADD . $RAILS_ROOT
 ENV PATH=$RAILS_ROOT/bin:${PATH}
 
 EXPOSE 3000
-CMD bundle exec rails s -b '0.0.0.0' | bundle exec sidekiq -C /task_manager/config/sidekiq.yml
+CMD bundle exec rails s -b '0.0.0.0'
