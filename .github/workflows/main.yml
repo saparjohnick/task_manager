@@ -17,19 +17,26 @@ jobs:
       #   with:
       #     github-token: ${{ secrets.GITHUB_TOKEN }}
       #     path-to-lcov: coverage/lcov/lcov.info
-      - name: Deploying to heroku
-        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
-          heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
-          usedocker: true
-          docker_build_args: |
-            RAILS_ENV
-            NODE_ENV
-            SECRET_KEY_BASE
+      # - name: Deploying to heroku
+      #   uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      #   with:
+      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #     heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
+      #     heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
+      #     usedocker: true
+      #     docker_build_args: |
+      #       RAILS_ENV
+      #       NODE_ENV
+      #       SECRET_KEY_BASE
 
-        env:
-          SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
-          RAILS_ENV: production
-          NODE_ENV: production
+      #   env:
+      #     SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
+      #     RAILS_ENV: production
+      #     NODE_ENV: production
+      - name: Deploy Multiple Docker Images to Heroku Apps with Logs
+        uses: pysan3/docker-compose-multiple-apps-heroku-deploy@v6.5
+        with:
+          email: ${{ secrets.HEROKU_EMAIL }} # your heroku email
+          api_key: ${{ secrets.HEROKU_API_KEY }} # your  heroku api key
+          docker_compose_file: 'docker-compose.yml' # set the path to the folder where the docker-compose file is located
+          heroku_apps: '[{"imagename":"web","appname":"task-manager-dualboot","apptype":"web"},{"imagename":"sidekiq","appname":"sidekiq","apptype":"worker"}]' # List of Docker Image name, Heroku app and Heroku app type
