@@ -17,22 +17,22 @@ jobs:
       #   with:
       #     github-token: ${{ secrets.GITHUB_TOKEN }}
       #     path-to-lcov: coverage/lcov/lcov.info
-      # - name: Deploying to heroku
-      #   uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-      #   with:
-      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-      #     heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
-      #     heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
-      #     usedocker: true
-      #     docker_build_args: |
-      #       RAILS_ENV
-      #       NODE_ENV
-      #       SECRET_KEY_BASE
+      - name: Deploying to heroku
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
+          heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
+          usedocker: true
+          docker_build_args: |
+            RAILS_ENV
+            NODE_ENV
+            SECRET_KEY_BASE
 
-      #   env:
-      #     SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
-      #     RAILS_ENV: production
-      #     NODE_ENV: production
+        env:
+          SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
+          RAILS_ENV: production
+          NODE_ENV: production
       - name: Deploy Multiple Docker Images to Heroku Apps with Logs
         uses: pysan3/docker-compose-multiple-apps-heroku-deploy@v6.5
         with:
