@@ -6,11 +6,11 @@ html lang="en"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     title= content_for?(:title) ? yield(:title) : "Task Manager"
     link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
-    = stylesheet_link_tag "application", media: "all"
     = csrf_meta_tags
+    = javascript_packs_with_chunks_tag "application"
+    = stylesheet_link_tag "application", media: "all"
 
   body
-    = javascript_packs_with_chunks_tag 'application'
     header.mdl-layout__header
       .mdl-layout__header-row
         .material-icons tab

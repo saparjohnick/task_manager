@@ -7,30 +7,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run tests
-        env:
-          COVERAGE: true
-          RAILS_ENV: test
-        run: docker-compose --file docker-compose.ci.yml run ci
-
-      - name: Coveralls GitHub Action
-        uses: coverallsapp/github-action@1.1.3
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: coverage/lcov/lcov.info
-
+      # - name: Run tests
+      #   env:
+      #     COVERAGE: true
+      #     RAILS_ENV: test
+      #   run: docker-compose --file docker-compose.ci.yml run -rm ci
+      # - name: Coveralls GitHub Action
+      #   uses: coverallsapp/github-action@1.1.3
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     path-to-lcov: coverage/lcov/lcov.info
       - name: Deploying to heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_ACCOUNT_EMAIL}}
-          usedocker: true
           docker_build_args: |
-            RAILS_ENV
-            NODE_ENV
             SECRET_KEY_BASE
+
         env:
           SECRET_KEY_BASE: ${{secrets.SECRET_KEY_BASE}}
-          RAILS_ENV: production
-          NODE_ENV: production

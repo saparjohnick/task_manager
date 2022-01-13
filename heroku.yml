@@ -2,4 +2,8 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: bundle exec puma -C config/puma.rb
+  web: bundle exec rails s -b '0.0.0.0'
+  worker:
+    command:
+      - bundle exec sidekiq -C config/sidekiq.yml
+    image: web
