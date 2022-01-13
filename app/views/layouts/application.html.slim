@@ -7,7 +7,7 @@ html lang="en"
     title= content_for?(:title) ? yield(:title) : "Task Manager"
     link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"
     = csrf_meta_tags
-    = javascript_packs_with_chunks_tag "application", media: "all"
+    = javascript_packs_with_chunks_tag "application"
     = stylesheet_link_tag "application", media: "all"
 
   body
