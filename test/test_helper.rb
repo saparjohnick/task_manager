@@ -1,7 +1,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
-# require 'rails/test_help'
-# require 'sidekiq/testing'
+require 'rails/test_help'
+require 'sidekiq/testing'
 
 if ENV['COVERAGE']
   require 'simplecov'
@@ -20,7 +20,7 @@ class ActiveSupport::TestCase
   include ActionMailer::TestHelper
   include AuthHelper
 
-  # Sidekiq::Testing.inline!
+  Sidekiq::Testing.inline!
 
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
