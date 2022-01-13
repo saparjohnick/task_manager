@@ -13,7 +13,7 @@ module TaskManager
     config.assets.paths << Rails.root.join('node_modules')
     config.hosts << "task-manager-dualboot.herokuapp.com"
     config.hosts << "0.0.0.0"
-    config.active_job.queue_adapter = :sidekiq
+    # config.active_job.queue_adapter = :sidekiq
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
